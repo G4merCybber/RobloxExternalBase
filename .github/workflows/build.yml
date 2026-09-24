@@ -19,7 +19,7 @@ jobs:
     # 3. Добавлен флаг /p:TreatWarningsAsErrors=false, чтобы компилятор не падал из-за мелких предупреждений в коде
     - name: Build Solution
       run: |
-        msbuild RobloxExternalBase.sln /p:Configuration=Release /p:Platform=x64 /p:TreatWarningsAsErrors=false
+        msbuild external.sln /p:Configuration=Release /p:Platform=x64 /p:TreatWarningsAsErrors=falsе
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
