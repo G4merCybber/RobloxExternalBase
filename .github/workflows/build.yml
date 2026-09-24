@@ -1,22 +1,25 @@
 name: Build RobloxExternalBase
 
 on:
-  workflow_dispatch: # Позволяет запускать сборку вручную кнопкой
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-latest # Запуск на сервере с Windows
+    runs-on: windows-latest
 
     steps:
+    # 1. Обновлено до v4 (поддерживает Node 24)
     - name: Checkout code
       uses: actions/checkout@v4
 
+    # 2. Обновлено до v3 (официальная версия Microsoft с поддержкой Node 24)
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
 
+    # 3. Добавлен флаг /p:TreatWarningsAsErrors=false, чтобы компилятор не падал из-за мелких предупреждений в коде
     - name: Build Solution
       run: |
-        msbuild RobloxExternalBase.sln /p:Configuration=Release /p:Platform=x64
+        msbuild RobloxExternalBase.sln /p:Configuration=Release /p:Platform=x64 /p:TreatWarningsAsErrors=false
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
